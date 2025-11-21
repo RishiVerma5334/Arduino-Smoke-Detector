@@ -1,5 +1,11 @@
 # Arduino-Smoke-Detector
 A small smoke detector based on arduino.
+Made by:-
+1) Soham Biswas RA2511003011541
+2) Rishi Verma RA2511003011569
+3) Nikita Deb RA2511003011567
+4) Niharika Das RA2511003011547
+5) Jahnavi RA2511003011571
 
 // Pin Definitions
 #define MQ2PIN A0         // MQ-2 analog output to Analog Pin A0
