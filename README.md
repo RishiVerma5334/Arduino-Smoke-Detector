@@ -35,3 +35,15 @@ If the value is higher than the safety threshold, the system triggers an alarm u
 4. LPG / methane leakage alarm
 
 5. Smart home IoT system integration
+
+# Made By
+
+Soham Biswas
+
+Rishi Verma
+
+Nikita Deb
+
+Niharika Das
+
+Jahnavi
