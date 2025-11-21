@@ -1,112 +1,37 @@
-# Arduino-Smoke-Detector
-A small smoke detector based on arduino.
-Made by:-
-1) Soham Biswas RA2511003011541
-2) Rishi Verma RA2511003011569
-3) Nikita Deb RA2511003011567
-4) Niharika Das RA2511003011547
-5) Jahnavi RA2511003011571
+# MQ-2 Smoke & Gas Detection System
+Arduino-Based Environmental Safety Alert System
 
-// Pin Definitions
-#define MQ2PIN A0         // MQ-2 analog output to Analog Pin A0
-#define BUZZER 8          // Buzzer connected to Digital Pin 8
-#define LED 9             // LED connected to Digital Pin 9
+This project detects smoke or harmful gas concentration using an MQ-2 gas sensor and activates a buzzer and LED alarm when the value exceeds a predefined danger threshold.
+It is useful for home safety, industrial environments, kitchen safety, and fire detection systems.
 
-// Smoke detection threshold (adjust based on your sensor calibration)
-#define SMOKE_THRESHOLD 300  // Analog value threshold for smoke detection
+# Hardware Components
 
-// Variables
-int mq2Value = 0;
-bool smokeDetected = false;
+1. Arduino UNO / Nano
 
-void setup() {
-  // Initialize Serial Monitor
-  Serial.begin(9600);
-  
-  // Set pin modes
-  pinMode(BUZZER, OUTPUT);
-  pinMode(LED, OUTPUT);
-  pinMode(MQ2PIN, INPUT);
-  
-  // Ensure buzzer and LED are off initially
-  digitalWrite(BUZZER, LOW);
-  digitalWrite(LED, LOW);
-  
-  // Warm-up message
-  Serial.println("System Initializing...");
-  Serial.println("MQ-2 sensor warming up (30 seconds recommended)...");
-  delay(2000);
-  Serial.println("System Ready!");
-  Serial.println();
-}
+2. MQ-2 Gas & Smoke Sensor
 
-void loop() {
-  // Read MQ-2 sensor
-  mq2Value = analogRead(MQ2PIN);
-  
-  // Check if smoke is detected
-  smokeDetected = (mq2Value > SMOKE_THRESHOLD);
-  
-  // Print table header
-  Serial.println("╔════════════════════════════════════════════════════════════╗");
-  Serial.println("║              SMOKE DETECTION SYSTEM                        ║");
-  Serial.println("╠════════════════════════════════════════════════════════════╣");
-  
-  // MQ-2 sensor value row
-  Serial.print("║ MQ-2 Sensor Value:  ");
-  Serial.print(mq2Value);
-  printSpaces(37 - String(mq2Value).length());
-  Serial.println("║");
-  
-  // Smoke detection status row
-  Serial.print("║ Smoke Detected:     ");
-  if (smokeDetected) {
-    Serial.print("YES - ALARM ACTIVE!");
-    printSpaces(21);
-  } else {
-    Serial.print("NO");
-    printSpaces(37);
-  }
-  Serial.println("║");
-  
-  Serial.println("╚════════════════════════════════════════════════════════════╝");
-  Serial.println();
-  
-  // Activate alarm if smoke detected
-  if (smokeDetected) {
-    activateAlarm();
-  } else {
-    // Ensure buzzer and LED are off when no smoke
-    digitalWrite(BUZZER, LOW);
-    digitalWrite(LED, LOW);
-  }
-  
-  // Delay before next reading
-  delay(2000);
-}
+3. Buzzer
 
-// Function to activate buzzer and LED for 5 seconds
-void activateAlarm() {
-  unsigned long startTime = millis();
-  
-  while (millis() - startTime < 5000) {  // Run for 5 seconds
-    digitalWrite(BUZZER, HIGH);
-    digitalWrite(LED, HIGH);
-    delay(200);  // Beep pattern: ON for 200ms
-    
-    digitalWrite(BUZZER, LOW);
-    digitalWrite(LED, LOW);
-    delay(200);  // Beep pattern: OFF for 200ms
-  }
-  
-  // Ensure they're off after alarm
-  digitalWrite(BUZZER, LOW);
-  digitalWrite(LED, LOW);
-}
+4. LED
 
-// Helper function to print spaces for table alignment
-void printSpaces(int count) {
-  for (int i = 0; i < count; i++) {
-    Serial.print(" ");
-  }
-}
+5. Jumper wires
+
+6. USB cable
+
+7. Working Principle
+
+The MQ-2 sensor outputs an analog value, representing the concentration of smoke or gas (LPG, methane, propane, hydrogen, alcohol, CO).
+The system continuously reads this value using the Arduino’s analog input.
+If the value is higher than the safety threshold, the system triggers an alarm using a buzzer and LED.
+
+# Applications
+
+1. Fire and smoke detection systems
+
+2. Home kitchen gas leak safety systems
+
+3. Industrial air-quality monitoring
+
+4. LPG / methane leakage alarm
+
+5. Smart home IoT system integration
